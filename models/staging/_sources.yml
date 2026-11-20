@@ -1,0 +1,30 @@
+version: 2
+
+sources:
+  - name: olist
+    description: >
+      Raw Olist Brazilian e-commerce tables, loaded untouched by
+      scripts/load_raw.py. Every column is text; typing happens in staging.
+    schema: raw
+    tables:
+      - name: orders
+        columns:
+          - name: order_id
+            data_tests: [unique, not_null]
+      - name: order_items
+      - name: customers
+        columns:
+          - name: customer_id
+            data_tests: [unique, not_null]
+      - name: products
+        columns:
+          - name: product_id
+            data_tests: [unique, not_null]
+      - name: sellers
+        columns:
+          - name: seller_id
+            data_tests: [unique, not_null]
+      - name: order_payments
+      - name: order_reviews
+      - name: geolocation
+      - name: product_category_translation
