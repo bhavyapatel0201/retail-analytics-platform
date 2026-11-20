@@ -1,7 +1,7 @@
 # Changelog
 
 ## [Unreleased]
-
+- Nine staging views (orders, order items, customers, products, sellers, payments, reviews, geolocation, category translation)
 ### Added
 - dbt project scaffold with DuckDB (#1)
 - DuckDB profile, layer materializations and dbt_utils package
