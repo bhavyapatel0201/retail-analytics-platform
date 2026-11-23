@@ -1,4 +1,4 @@
-# retail-analytics-platform
+# Retail Analytics Platform
 
 A dbt project that turns the Olist Brazilian e-commerce dataset (nine CSV files, orders from 2016 to 2018) into tested, documented analytics tables. It runs on DuckDB, so it needs no server, account or cost.
 
@@ -14,12 +14,21 @@ A dbt project that turns the Olist Brazilian e-commerce dataset (nine CSV files,
 Details and decisions are in [`docs/devlog.md`](docs/devlog.md), [`docs/decisions/`](docs/decisions) and [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Quick start
+
+```
 python -m venv .venv
-.venv\Scripts\activate # macOS/Linux: source .venv/bin/activate
+.venv\Scripts\activate          # macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
 dbt deps
+```
 
 Put the nine Olist CSVs in `data/raw/`, then:
+
+```
+python scripts/load_raw.py
+dbt build --select staging
+```
+
 ## Design choices
 
 - **DuckDB as the warehouse:** free, reproducible, one local file. Marts are planned to export to Parquet for a Power BI dashboard (see ADR-0001).
@@ -27,5 +36,12 @@ Put the nine Olist CSVs in `data/raw/`, then:
 - **Data findings that shaped the models:** `customer_id` is per order, so the real customer key is `customer_unique_id`; some orders have split payments or several reviews; geolocation collapses from about 1,000,000 rows to one row per zip prefix.
 
 ## Layout
+
+```
+models/staging/   one view per source table
+models/marts/     core and analytics tables (planned)
+scripts/          raw loader and data profiling
+docs/             devlog and architecture decision records
+```
 
 License: see [LICENSE](LICENSE).
